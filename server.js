@@ -83,7 +83,7 @@ app.use(helmet());
 // app.use('/image', express.static(path.join(__dirname, 'image/')));
 
 //point static path to dist
-app.use(express.static(path.join(__dirname, 'dist/')));
+app.use(express.static(path.join(__dirname, 'dist/worldfeed')));
 
 //set our api router
 app.use('/api', api);
@@ -91,7 +91,7 @@ app.use('/api', api);
 //NOTE: this must be defined after all other routes are defined
 //catch all other routes and return the index html file
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, 'dist/index.html'));
+	res.sendFile(path.join(__dirname, 'dist/worldfeed/index.html'));
 });
 ////////////////////////////////////////////////////////////////////////
 

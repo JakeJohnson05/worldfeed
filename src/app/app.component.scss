@@ -1,0 +1,4 @@
+div.page {
+	display: grid;
+	grid-template: 75px calc(100vh - 75px) 75px / 1fr;
+}

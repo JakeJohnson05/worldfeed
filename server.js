@@ -10,33 +10,32 @@ const app = express();
 // configure environment vars
 require('dotenv').config();
 
-//imports
+// imports
 const path = require('path');
 const http = require('http');
 const flash = require('express-flash');
-//express-session is used to establish a session with a user, using cookies
-const session = require('express-session');
-//require connect-session-sequelize which will let us store the session information in the database
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+// express-session is used to establish a session with a user, using cookies
+// const session = require('express-session');
+// require connect-session-sequelize which will let us store the session information in the database
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 ///////////////////////////////////////////////////////////////////////
 
-//connect to the database and require the instance and models here
-//NOTE: make sure nothing that requires the database happens before the database is initialized
+// connect to the database and require the instance and models here
+// NOTE: make sure nothing that requires the database happens before the database is initialized
 // const { sequelize } = require('./database');
-//require the passport.js local strategy and passport instance we set up in local-strategy.js
+// require the passport.js local strategy and passport instance we set up in local-strategy.js
 // const { localStrategy, passport } = require('./server/authentication/local-strategy');
-//this object contains flags indicating certain commandline options specified in cmdline-options.js
-// const COMMAND_LINE_OPTIONS = require('./cmdline-options');
-//require our api router here
-// const api = require('./server/routes/api');
+
+// require our api router here
+const api = require('./api/api');
 
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
-//Middleware
+// Middleware
 //
 // parsers for POST data
 app.use(bodyParser.json());
@@ -46,40 +45,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////
-//set up express-session middleware
+// set up express-session middleware
 //
-//create a session store for the express-session in our sequelize orm (MySQL)
-var sessionStore = new SequelizeStore({ db: sequelize });
-//session options
-const sess = {
-	secret: "bblv3ow0kjbnanmmlx39nab0lcv2",
-	store: sessionStore,
-	resave: false,
-	saveUninitialized: false,
-	proxy: true,
-	cookie: { secure: false }
-}
-
+// create a session store for the express-session in our sequelize orm (MySQL)
+// var sessionStore = new SequelizeStore({ db: sequelize });
+// //session options
+// const sess = {
+// 	secret: "bblv3ow0kjbnanmmlx39nab0lcv2",
+// 	store: sessionStore,
+// 	resave: false,
+// 	saveUninitialized: false,
+// 	proxy: true,
+// 	cookie: { secure: false }
+// }
 // use express-session to establish sessions with users, using cookies
-app.use(session(sess));
+// app.use(session(sess));
+// create the tables for the session
+// sessionStore.sync();
 
-//create the tables for the session
-sessionStore.sync();
-
-//set up flash middleware for flashing messages
+// set up flash middleware for flashing messages
 app.use(flash());
-
-//protect against dangerous web vulnerabilities by setting HTTP headers
-//appropriately
+// protect against dangerous web vulnerabilities by setting HTTP headers
 app.use(helmet());
 
-//implement our passport.js local strategy for authentication
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(localStrategy); 
+// implement our passport.js local strategy for authentication
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(localStrategy); 
 
-// start CronJobs from ./schedule.js
-goalLogReminderJob.start();
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
@@ -102,18 +95,14 @@ app.get('*', (req, res) => {
 });
 ////////////////////////////////////////////////////////////////////////
 
-/**
- * get a port from environment and store in express
- */
+/** get a port from environment and store in express */
 const port = process.env.PORT || '3000';
 const hostname = '127.0.0.1';
 app.set('port', port);
 
+/** Use http for the server */
 const server = http.createServer(app);
 
 //if running in production, listen on the hostname, instead of localhost
-if (!COMMAND_LINE_OPTIONS.developerMode) {
-	server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
-} else {
-	server.listen(port, () => console.log(`API running on localhost:${port}`));
-}
+if (!process.env.DEV) server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
+else server.listen(port, () => console.log(`API running on localhost:${port}`));

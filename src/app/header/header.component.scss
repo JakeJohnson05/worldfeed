@@ -1,0 +1,13 @@
+@import "src/variables.scss";
+
+div.container {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	height: 70px;
+	padding: 6px 24px;
+	border-bottom: 2px solid $orange;
+}
+
+a.site-logo > img {
+	height: 50px;
+}

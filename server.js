@@ -97,12 +97,11 @@ app.get('*', (req, res) => {
 
 /** get a port from environment and store in express */
 const port = process.env.PORT || '3000';
-const hostname = '127.0.0.1';
 app.set('port', port);
 
 /** Use http for the server */
 const server = http.createServer(app);
 
 //if running in production, listen on the hostname, instead of localhost
-if (process.env.DEV !== 'true') server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
-else server.listen(port, () => console.log(`API running on localhost:${port}`));
+// if (process.env.DEV !== 'true') server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
+server.listen(port, () => console.log(`API running on localhost:${port}`));

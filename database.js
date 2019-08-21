@@ -1,6 +1,9 @@
 /** Using Sequelize as the ORM to interact with the database */
 const Sequelize = require('sequelize');
 
+/** options from the command line */
+const CMDLINE_OPTIONS = require('./cmdline-options.js');
+
 // if in dev, use local creds and local db
 // else, use the clearDB url
 /** The connection instance to the database */
@@ -8,7 +11,7 @@ const sequelize = process.env.DEV ? new Sequelize(process.env.DB, process.env.DB
 	host: 'localhost',
 	dialect: 'mysql',
 	operatorsAliases: false,
-	logging: true,
+	logging: CMDLINE_OPTIONS.verboseBuilds || false,
 	pool: {
 		max: 5,
 		min: 0,
@@ -22,7 +25,7 @@ sequelize.authenticate()
 	.then(() => console.log('Connection established to the database'))
 	.catch(err => console.error('Unable to connect to the database: ', err));
 
-	
+
 //require all of the constructors for the db models
 // const UserModel = require('@model-constructors/user');
 
@@ -42,22 +45,16 @@ sequelize.authenticate()
 // UserCredentials.belongsTo(User, { onDelete: 'cascade', foreignKey: 'user_id' });
 
 // sync the tables
-//	(force sync the database if the --fsync tag is present in the command line arguments)
-// sequelize.sync({ force: COMMAND_LINE_OPTIONS.forceSyncDatabase })
-// 	.then(() => {
-// 		console.log(COMMAND_LINE_OPTIONS.forceSyncDatabase ? 'The database has been successfully force-synced!' : 'The database has been successfully synced!');
-// 		// if !admin create the base admin
-// 		require('@prod-modules/base_admin')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds });
+//	(force sync the database if the -fsync tag is present in the command line arguments)
+sequelize.sync({ force: CMDLINE_OPTIONS.forceSyncDB })
+	.then(() => {
+		console.log(CMDLINE_OPTIONS.forceSyncDB ? 'Database successfully force-synced!' : 'Database successfully synced!');
+		// if !admin create the base admin
+		// require('@prod-modules/base_admin')({ verbose: CMDLINE_OPTIONS.verboseBuilds });
 
-// 		if (COMMAND_LINE_OPTIONS.buildBaseModule) require('@prod-modules/base_build')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds });
-// 		if (COMMAND_LINE_OPTIONS.buildCllaExt) require('@prod-modules/new_clla_build')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds, makeMigrations: COMMAND_LINE_OPTIONS.makeMigrations });
-// 		if (COMMAND_LINE_OPTIONS.userCategoryMigration) require('@prod-modules/user_category_migration')({ makeMigrations: true });
-// 		if (COMMAND_LINE_OPTIONS.createShortAssessments) require('@prod-modules/short_assessments_ext')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds });
+})
+	.catch(err => console.error('Unable to connect to the database: ', err)); 
 
-// 		if (COMMAND_LINE_OPTIONS.createTest15Dimes) require('@tests/create_test_15_dimensions')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds, createUser: true });
-// 		if (COMMAND_LINE_OPTIONS.createTestFiles) require('@tests/create_test_files')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds });
-// 		if (COMMAND_LINE_OPTIONS.createTest15DimesNoUser && !COMMAND_LINE_OPTIONS.createTest15Dimes) require('@tests/create_test_15_dimensions')({ verbose: COMMAND_LINE_OPTIONS.verboseBuilds, createUser: false });
-	// });
 
 
 module.exports = {

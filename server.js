@@ -104,5 +104,5 @@ app.set('port', port);
 const server = http.createServer(app);
 
 //if running in production, listen on the hostname, instead of localhost
-if (!process.env.DEV) server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
+if (process.env.DEV !== 'true') server.listen(port, hostname, () => console.log(`API running on https://${hostname}:${port}`));
 else server.listen(port, () => console.log(`API running on localhost:${port}`));

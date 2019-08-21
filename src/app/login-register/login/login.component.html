@@ -1,0 +1,44 @@
+<div class="login-reg-page">
+    <mat-card class="login-reg-card">
+  
+      <div class="form-title">
+        <span>Login</span>
+      </div>
+  
+      <div class="err-ctn" [ngSwitch]="resStatus">
+        <mat-error align="right" *ngSwitchCase="401">Invalid Username or Password.</mat-error>
+        <mat-error align="right" *ngSwitchCase="500">We are experiencing server difficulties. Please try again later.</mat-error>
+      </div>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-ctn">
+  
+          <div class="field-ctn">
+            <mat-form-field>
+              <input matInput formControlName="username" type="text" placeholder="Username or Email">
+            </mat-form-field>
+          </div>
+  
+          <div class="password-ctn">
+            <div class="field-ctn">
+              <mat-form-field>
+                <input matInput formControlName="password" [type]="passwordVisibility ? 'text':'password'" placeholder="Password">
+                <button mat-icon-button matSuffix type="button" class="pass-vis-ctn" tabindex="-1" (click)="passwordVisibility = !passwordVisibility">
+                  <mat-icon area-label="password visibility icon">{{ passwordVisibility ? 'visibility' : 'visibility_off' }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <button mat-button type="button" tabindex="-1" routerLink="/forgot-password" class="forgot-password">Forgot Password?</button>
+          </div>
+        </div>
+  
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!isValid()">Login</button>
+      </form>
+  
+      <div class="switch-form-ctn">
+        <div>New to 1080 Sweep?</div>
+        <a mat-button routerLink="/register">Create an Account</a>
+      </div>
+  
+    </mat-card>
+  </div>

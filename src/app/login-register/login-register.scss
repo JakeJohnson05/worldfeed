@@ -1,0 +1,64 @@
+@import '~@angular/material/theming';
+
+.login-reg-page {
+  display: flex;
+  align-content: center;
+  min-height: 90%;
+  padding-top: 16px;
+}
+
+.login-reg-card {
+  width: 40vw;
+  min-width: 400px;
+  margin: auto;
+  padding: 24px;
+  @include mat-elevation(3);
+}
+
+.form-title {
+  font-size: 250%;
+  font-family: 'ubuntu';
+  padding: 24px 0 24px 24px;
+  cursor: default;
+}
+
+.form-ctn {
+  display: grid;
+  grid-row-gap: 40px;
+  margin: 24px 16px 24px 32px;
+}
+
+.overhead {
+  cursor: default;
+  display: grid;
+  grid-template-columns: minmax(50%, max-content) max-content;
+  align-items: center;
+  & > span:first-child {
+    font-size: 150%;
+    margin-right: 16px;
+  }
+}
+
+mat-form-field {
+  min-width: 70%;
+  margin-left: 16px;
+  font-size: 120%;
+}
+
+.switch-form-ctn {
+  display: grid;
+  width: 90%;
+  margin: auto;
+  margin-top: 16px;
+  grid-template-columns: max-content;
+  grid-row-gap: 8px;
+  justify-content: right;
+  text-align: center;
+}
+
+button[type="submit"] {
+  font-size: 90%;
+  margin-left: 50%;
+  margin-top: 40px;
+  transform: translate(-50%, -50%);
+}

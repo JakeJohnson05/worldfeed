@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginRegisterService } from '../login-register.service';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '@auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   ) {
     //build the login form with Angular's FormBuilder (provided in root, by ReactiveFormsModule)
     this.loginForm = this.fb.group({
-      'username': ['', Validators.required],
-      'password': ['', Validators.required]
+      'username': [''],
+      'password': ['']
     });
 
     //set the password non-visible by default
@@ -52,6 +52,6 @@ export class LoginComponent implements OnInit {
   get password() { return this.loginForm.get('password') }
 
   isValid(): boolean {
-    return (this.username.errors || this.password.errors) ? false : true
+    return (this.username.errors || this.password.errors || !this.username.value || !this.password.value) ? false : true
   }
 }

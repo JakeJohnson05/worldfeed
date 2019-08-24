@@ -5,8 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { CommonMaterialModule } from './common-material/common-material.module';
+
+import { AppRoutingModule } from './app-routing.module';
 import { LoginRegisterModule } from './login-register/login-register.module';
 
 import { AppComponent } from './app.component';
@@ -22,14 +23,14 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    CommonMaterialModule,
     AppRoutingModule,
     LoginRegisterModule,
     BrowserModule,
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule,
-    CommonMaterialModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

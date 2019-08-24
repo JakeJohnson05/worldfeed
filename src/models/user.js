@@ -21,6 +21,10 @@ module.exports = (sequelize, type) => sequelize.define('user', {
 		type: type.STRING(50),
 		allowNull: false
 	},
+	username: {
+		type: type.STRING(50),
+		allowNull: false
+	},
 	email: {
 		type: type.STRING(255),
 		allowNull: false

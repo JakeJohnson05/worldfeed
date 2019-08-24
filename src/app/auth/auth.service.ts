@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,11 +13,12 @@ export class AuthService {
 	 * (isAuthenticated responds with status 200 if the user has been authenticated,
 	 * and 401 if they have not)
    */
-	isAuthEndpoint: string = 'api/auth/isauth';
+	private isAuthEndpoint: string = 'api/auth/isauth';
 	/** this is the url to redirect the user to after they log in */
 	public redirectUrl: string;
 	/** Emits boolean if the user is logged in or not */
-	authStatus: BehaviorSubject<boolean>;
+	private authStatus: BehaviorSubject<boolean>;
+
 	constructor(
 		private http: HttpClient
 	) {
@@ -51,9 +51,7 @@ export class AuthService {
 	 */
 	public setAuthStatus(isAuth: boolean): void { this.authStatus.next(isAuth) }
 
-	/**
-	 * 
-	 */
+	/** Complete all observers on the authstatus */
 	public cleanObservers(): void {
 		this.authStatus.observers.forEach(observer => observer.complete());
 	}

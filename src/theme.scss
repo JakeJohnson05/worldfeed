@@ -1,0 +1,42 @@
+@import "~@angular/material/theming";
+@import "src/variables.scss";
+
+$md-orange: (
+  50: #fef3e0,
+  100: #fde1b3,
+  200: #fcce80,
+  300: #fbba4d,
+  400: #faab26,
+  500: #f99c00,
+  600: #f89400,
+  700: #f78a00,
+  800: #f68000,
+  900: #f56e00,
+  A100: #ffffff,
+  A200: #fff1e8,
+  A400: #ffd2b5,
+  A700: #ffc29c,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+@include mat-core();
+$custom-theme-primary: mat-palette($md-orange, 900);
+$custom-theme-accent: mat-palette($mat-gray, A700);
+$custom-theme-warn: mat-palette($mat-red);
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+@include angular-material-theme($custom-theme);

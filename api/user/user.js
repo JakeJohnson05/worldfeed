@@ -22,10 +22,8 @@ const { User } = require('@database');
 
 router.get('/info', ensureLoggedIn('/login'), (req, res) => {
 	User.findByPk(req.user.id)
-		.then(user => {
-			if (!user) return res.status(404).json('No User found');
-			return res.status(200).json(user);
-		}).catch(err => res.status(500).json(err));
+		.then(user => user ? res.status(200).json(user) : res.status(404).json('No User found'))
+		.catch(err => res.status(500).json(err));
 })
 
 /**

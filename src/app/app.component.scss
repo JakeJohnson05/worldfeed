@@ -1,4 +1,4 @@
 div.page {
 	display: grid;
-	grid-template: 75px calc(100vh - 75px) 75px / 1fr;
+	grid-template: 75px minmax(calc(100vh - 75px), auto) 75px / 1fr;
 }

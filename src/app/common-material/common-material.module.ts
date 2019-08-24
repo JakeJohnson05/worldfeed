@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule, MatButtonModule, MatCardModule } from '@angular/material';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   declarations: [],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
@@ -30,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   exports: [
     MatInputModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,

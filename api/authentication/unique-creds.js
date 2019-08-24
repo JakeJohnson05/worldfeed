@@ -1,7 +1,7 @@
 // require the sequelize instance and user credentials model so that we can query existing credentials
-const { sequelize, User } = require('@database');
+const { User } = require('@database');
 /** Sequelize operators for querying */
-const Op = sequelize.Op;
+const Op = require('sequelize').Op;
 
 /**
  * this is a custom validator function to be used in the express-validator middleware.

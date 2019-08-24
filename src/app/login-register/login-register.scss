@@ -4,7 +4,7 @@
   display: flex;
   align-content: center;
   min-height: 90%;
-  padding-top: 16px;
+  margin: 16px 0 32px;
 }
 
 .login-reg-card {
@@ -17,7 +17,6 @@
 
 .form-title {
   font-size: 250%;
-  font-family: 'ubuntu';
   padding: 24px 0 24px 24px;
   cursor: default;
 }
@@ -43,7 +42,24 @@ mat-form-field {
   min-width: 70%;
   margin-left: 16px;
   font-size: 120%;
+  input { font-size: initial }
 }
+
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover, 
+// input:-webkit-autofill:focus,
+// textarea:-webkit-autofill,
+// textarea:-webkit-autofill:hover,
+// textarea:-webkit-autofill:focus,
+// select:-webkit-autofill,
+// select:-webkit-autofill:hover,
+// select:-webkit-autofill:focus {
+//   // border: 1px solid green;
+//   // -webkit-text-fill-color: green;
+//   // -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+//   // box-shadow: 0 0 0px 1000px #000 inset;
+//   // transition: background-color 5000s ease-in-out 0s;
+// }
 
 .switch-form-ctn {
   display: grid;

@@ -1,13 +1,21 @@
-@import "src/variables.scss";
+@import "src/variables";
 
-div.container {
+div.header-ctn {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: auto auto;
+	justify-content: space-between;
 	height: 70px;
 	padding: 6px 24px;
 	border-bottom: 2px solid $orange;
+	a.site-logo > img { height: 50px }
 }
 
-a.site-logo > img {
-	height: 50px;
+div.nav-options {
+	display: flex;
+	align-items: center;
+	padding-top: 8px;
+	&.no-user a {
+		height: max-content;
+		margin-left: 4px;
+	}
 }

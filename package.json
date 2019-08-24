@@ -23,6 +23,8 @@
     "@angular/platform-browser": "^8.2.3",
     "@angular/platform-browser-dynamic": "^8.2.3",
     "@angular/router": "^8.2.3",
+    "@types/bluebird": "^3.5.27",
+    "@types/validator": "^10.11.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "connect-session-sequelize": "^6.0.0",
@@ -32,6 +34,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.16.2",
     "express-validator": "^6.1.1",
+    "hammerjs": "^2.0.8",
     "helmet": "^3.20.0",
     "http": "0.0.0",
     "module-alias": "^2.2.1",
@@ -54,7 +57,6 @@
     "@types/jasmine": "^3.4.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.7.2",
-    "@types/sequelize": "^4.28.4",
     "codelyzer": "^5.1.0",
     "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -70,7 +72,7 @@
   },
   "_moduleAliases": {
     "@models": "src/models",
-    "@database": "database.js"
+    "@database": "./database.js"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.",
   "main": "server.js",

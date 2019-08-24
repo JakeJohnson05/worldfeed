@@ -1,8 +1,8 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { User, sequelize } = require('@database');
+const { User } = require('@database');
 /** Operators for sequelize querys */
-const Op = sequelize.Op;
+const Op = require('sequelize').Op;
 /** Module for hashed passwords */
 const bcrypt = require('bcrypt');
 

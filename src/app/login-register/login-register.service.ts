@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '@auth/auth.service';
+import { UserService } from '@user/user.service'; 
 import { UserRegistrationInfo } from './user-registration-info';
 
 @Injectable({
@@ -17,14 +18,15 @@ import { UserRegistrationInfo } from './user-registration-info';
 export class LoginRegisterService {
 
   /** api endpoint for logging a User in */
-  private loginEndpoint = 'api/auth/login/';
+  private loginEndpoint = 'api/user/login/';
   /** api endpoint to Register a new User */
-  private registerEndpoint = 'api/auth/register/';
+  private registerEndpoint = 'api/user/register/';
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router,
+    private userService: UserService,
+    private router: Router
   ) { }
 
 	/**
@@ -41,13 +43,13 @@ export class LoginRegisterService {
         if (response.status === 200) {
           // update the authenticated behavior subject to true
           this.authService.setAuthStatus(true);
-          // this.userService.requestUser();
+          this.userService.requestUser();
           this.router.navigateByUrl(this.authService.redirectUrl || '/dashboard');
           this.authService.redirectUrl = null;
         } else {
           // update the authenticated behavior subject to false
           this.authService.setAuthStatus(false);
-          // this.userService.requestUser();
+          this.userService.requestUser();
         }
       }), catchError(err => {
         if (err.status === 401) return of(401);
